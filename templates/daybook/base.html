@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<p>
+  <a href="{% url 'daybook:index' %}"> **Learning** </a>
+  <a href="{% url 'daybook:topics' %}"> **Topics* </a>
+</p>
 
-</body>
-</html>
+{% block content %}{% endblock content %}

@@ -1,0 +1,16 @@
+    {% extends "daybook/base.html" %}
+
+    {% block content%}
+    <p>Topics</p>
+
+    <ul>
+    {% for topic in topics %}
+      <li>{{ topic }}</li>
+        <a href="{% url 'daybook:topic' topic.id %}"> {{ topic }}</a>
+        {% empty %}
+      <li> No topics have been added yet </li>
+    {% endfor %}
+
+    </ul>
+    {% endblock content %}
+
