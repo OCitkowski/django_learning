@@ -1,0 +1,15 @@
+    {% extends "daybook/base.html" %}
+
+    {% block content%}
+    <p>Add new topik:</p>
+
+    <form action="{% url 'daybook:new_topic' %}" method="post">
+        {%csrf_token %}
+        {{ form.as_p }}
+
+        <button name="submit"> Add topic</button>
+
+    </form>
+
+    {% endblock content %}
+
