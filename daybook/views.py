@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
@@ -59,7 +59,8 @@ def new_entry(request, topic_id):
 
 def edit_entry(request, entry_id):
     """edit an existing entry."""
-    entry = Entry.objects.get(id=entry_id)
+    # entry = Entry.objects.get(id=entry_id)
+    entry = get_object_or_404(Entry, pk=entry_id)
     topic = entry.topic
 
     if request.method != 'POST':
@@ -69,6 +70,7 @@ def edit_entry(request, entry_id):
         if form.is_valid():
             form.save()
             return redirect('daybook:topic', topic_id=topic.id)
+
 
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'daybook/edit_entry.html', context)
