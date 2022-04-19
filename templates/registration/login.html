@@ -1,0 +1,26 @@
+{% extends "daybook/base.html" %}
+{% block content %}
+
+{% if form.errors %}
+<p> Your username and password didn't match. Please try again. </p>
+{% endif %}
+
+<form method="post" action="{% url 'users:login' %}">
+    {% csrf_token %}
+    {{ forms.as_p }}
+    <table>
+        <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+        </tr>
+    </table>
+
+    <button name="submit">Log in</button>
+    <input type="hidden" name="next"
+           value="{% url 'daybook:index' %}"/>
+</form>
+{% endblock content %}
