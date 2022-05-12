@@ -102,7 +102,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+# My settings
+LOGIN_URL = 'users:login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
