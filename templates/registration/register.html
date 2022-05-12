@@ -1,0 +1,28 @@
+{% extends "daybook/base.html" %}
+
+{% block content %}
+<form method="post" action="{% url 'users:register' %}">
+    {% csrf_token %}
+    {{ forms.as_p }}
+
+    <table>
+        <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password1.label_tag }}</td>
+            <td>{{ form.password1 }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password2.label_tag }}</td>
+            <td>{{ form.password2 }}</td>
+        </tr>
+
+    </table>
+
+    <button name="submit">Register</button>
+    <input type="hidden" name="next" value="{% url 'daybook:index' %}">
+
+</form>
+    {% endblock content %}
