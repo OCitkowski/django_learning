@@ -5,8 +5,8 @@
 
     <ul>
     {% for topic in topics %}
-      <li>{{ topic }}</li>
-        <a href="{% url 'daybook:topic' topic.id %}"> {{ topic }}</a>
+      <li><a href="{% url 'daybook:topic' topic.slug %}"> {{ topic }} </a></li>
+
         {% empty %}
       <li> No topics have been added yet </li>
     {% endfor %}

@@ -5,13 +5,15 @@ from .models import Topic, Entry
 class TopicForm(forms.ModelForm):
     class Meta:
         model = Topic
-        fields = ['text']
-        labels = {'text': ''}
+        fields = ['title']
+        labels = {'title': ''}
+
 
 
 class EntryForm(forms.ModelForm):
     class Meta:
         model = Entry
-        fields = ['text']
-        labels = {'text': ''}
-        widgets = {'text': forms.Textarea(attrs={'cols': 80})}
+        fields = ['title', 'text', 'is_published']
+        labels = {'title': 'title....', 'text': 'text....', 'is_published': 'is published'}
+
+        # widgets = {'title': forms.CharField(), 'text': forms.Textarea(attrs={'cols': 200})}
