@@ -6,9 +6,17 @@
     <ul>
     {% for topic in topics %}
       <li><a href="{% url 'daybook:topic' topic.slug %}"> {{ topic }} </a></li>
-
         {% empty %}
       <li> No topics have been added yet </li>
+    {% endfor %}
+    </ul>
+
+    <ul>
+    {% for entry in entries %}
+      <li><a href="{% url 'daybook:entry' entry.slug %}"> {{ entry }} </a></li>
+        <a> {{ entry.text }} </a>
+        {% empty %}
+      <li> No entries have been added yet </li>
     {% endfor %}
     </ul>
     <a href="{% url 'daybook:new_topic' %}"> Add new topic </a>

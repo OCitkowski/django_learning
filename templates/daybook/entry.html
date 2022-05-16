@@ -1,0 +1,13 @@
+{% extends "daybook/base.html" %}
+
+{% block content%}
+
+<ul>
+
+    <li><a> {{ entry.title }} </a>-</li>
+    <a> {{ entry.text }} </a>
+    <li><a> {{ entry.date_added }} </a></li>
+</ul>
+
+{% endblock content %}
+
