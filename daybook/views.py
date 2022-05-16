@@ -27,6 +27,8 @@ class EntryDetailView(DetailView):
 #     # return HttpResponse("Hello, world. You're at the polls index.")
 
 class TopicsListView(ListView):
+
+    paginate_by = 2
     model = Topic
     queryset = Topic.objects.order_by('date_added')
     template_name = 'daybook/topics.html'
@@ -35,6 +37,7 @@ class TopicsListView(ListView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
+        context['title'] = 'All topic'
         # Add in a QuerySet of all the books
         # context['topics'] = Topic.objects.all()
         if len(Entry.objects.filter(owner=self.request.user)) == 0 :
@@ -66,6 +69,7 @@ class TopicsListView(ListView):
 
 class TopicDetailView(DetailView):
 
+    paginate_by = 2
     model = Topic
     template_name = 'daybook/topic.html'
     context_object_name = 'topic'
@@ -73,7 +77,7 @@ class TopicDetailView(DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Main page'
+        context['title'] = self.kwargs['topic_slug']
         topic_id = Topic.objects.get(slug=self.kwargs['topic_slug']).id
         entries = Entry.objects.filter(is_published=True, topic=topic_id, owner=self.request.user).order_by('-date_added')
         context['entries'] = entries

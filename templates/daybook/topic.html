@@ -1,27 +1,35 @@
-    {% extends "daybook/base.html" %}
+{% extends "daybook/base.html" %}
+{% block title %} {{ title }} {% endblock title %}
+{% block content%}
+<p>Topic: {{ topic }} {{ topic.slug }}</p>
+<p> <a> Entries: </a>  <a href="{% url 'daybook:new_entry' topic.slug %}"> Add new entry </a> </p>
 
-    {% block content%}
-    <p>Topic: {{ topic}}</p>
+{% for entry in entries %}
+    <li><a href="{% url 'daybook:entry' entry.slug %}"> {{ entry.title }} </a></li>
+    <p>{{ entry.date_added|date:'M d, Y H:t' }}</p>
+    <p>{{ entry |linebreaks }}</p>
+    <p>{{ entry.topic }}</p>
+{% empty %}
+    <li> There are no entries for this topic yet</li>
+{% endfor %}
 
-    <p>Entries: </p>
-    <p>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
 
-    </p>
-    <ul>
-    {% for entry in entries %}
-        <li>
-          <p>{{ entry.date_added|date:'M d, Y H:t' }}</p>
-          <p>{{ entry.text|linebreaks }}</p>
-            <p>{{ entry.topic }}</p>
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
 
-          <p>
-              <a href="{% url 'daybook:edit_entry' entry.slug %}"> Edit entry </a>
-          </p>
-        </li>
-      {% empty %}
-        <li> There are no entries for this topic yet</li>
-    {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 
-    </ul>
-    {% endblock content %}
+{% endblock content %}
 

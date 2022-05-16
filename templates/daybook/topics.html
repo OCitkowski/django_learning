@@ -1,5 +1,5 @@
     {% extends "daybook/base.html" %}
-
+    {% block title %} {{ title }} {% endblock title %}
     {% block content%}
     <p>Topics</p>
 
@@ -13,13 +13,31 @@
 
     <ul>
     {% for entry in entries %}
-      <li><a href="{% url 'daybook:entry' entry.slug %}"> {{ entry }} </a></li>
-        <a> {{ entry.text }} </a>
+      <li><a href="{% url 'daybook:entry' entry.slug %}"> Read me  - {{ entry.title }} </a></li>
+        <a> {{ entry }} </a>
         {% empty %}
       <li> No entries have been added yet </li>
     {% endfor %}
     </ul>
     <a href="{% url 'daybook:new_topic' %}"> Add new topic </a>
+
+    <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 
     {% endblock content %}
 

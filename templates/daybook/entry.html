@@ -7,6 +7,10 @@
     <li><a> {{ entry.title }} </a>-</li>
     <a> {{ entry.text }} </a>
     <li><a> {{ entry.date_added }} </a></li>
+
+    <p>
+        <a href="{% url 'daybook:edit_entry' entry.slug %}"> Edit entry </a>
+    </p>
 </ul>
 
 {% endblock content %}

@@ -34,7 +34,7 @@ class Entry(models.Model):
         super(Entry, self).save(*args, **kwargs)
 
     def __str__(self):
-        if len(self.text) >= 50:
-            return f"{self.text[:50]}..."
+        if len(self.text) >= 300:
+            return f"{self.text[:300]}..."
         else:
-            return f"{self.text[:50]}"
+            return f"{self.text[:300]}"
